@@ -1,6 +1,11 @@
-The code is not completely done yet and has not been properly tested. it is uploaded mainly for educational purpuses as i think it is a quite intuitive way of solving the approximate pattern matching problem. Feel free correcting or optimizing parts. 
+The code is not completely done and has not been properly tested yet.
 
-The algorithm is build on following principles an algotithms:
+I have uploaded this project for educational purpuses as i think it is a quite intuitive way of solving the approximate pattern matching problem. I have not heard of or seen this algorithm before so i guess i can name it PAM (Pigeonhole approximative matching). Feel free correcting or optimizing parts. 
 
-... to be continued
+The algorithm is build on following principles:
+
+Allowing d mismatches we use the pigeonhole principle to devide our sustring into d+1 pieces. One of these pices can be found using exact pattern matching.
+These pieces are then search using binary search in a suffix array (which in this implementation is created by prefix doubling).
+
+
 
