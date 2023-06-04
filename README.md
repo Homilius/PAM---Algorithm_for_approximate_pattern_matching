@@ -4,8 +4,12 @@ I have uploaded this project for educational purpuses as i think it is a quite i
 
 The algorithm is build on following principles:
 
-Allowing d mismatches we use the pigeonhole principle to devide our sustring into d+1 pieces. One of these pices can be found using exact pattern matching.
-These pieces are then search using binary search in a suffix array (which in this implementation is created by prefix doubling).
+Allowing d mismatches we use the pigeonhole principle to devide our sustring into d+1 pieces. One of these pices can be found using exact pattern matching (which is a much easier problem to solve).
+These pieces are then search using binary search in a suffix array constructed from the main string (which in this implementation is created by prefix doubling). 
+
+
+
+
 
 
 
