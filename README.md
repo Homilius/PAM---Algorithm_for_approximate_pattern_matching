@@ -15,12 +15,14 @@ I am convinced that this algorithm has the potential to run quite efficiently wi
 ############################################################
 # Librarys:
 
+
 import re
 import random
 import numpy as np
 
 ############################################################
 # Functions:
+
 
 def edits_to_cigar(edits: str):
     def split_blocks(x: str):
@@ -31,6 +33,7 @@ def edits_to_cigar(edits: str):
         short = '{}{}'.format(len(a),a[0])
         cigar+= short
     return cigar
+
 
 def get_edits(p: str, q: str):
     assert len(p) == len(q)
@@ -51,6 +54,7 @@ def get_edits(p: str, q: str):
         q_out = q.replace('-','')
         edits = edits
     return p_out, q_out , edits
+
 
 def SuffixArray(string):
     if string == '' or string == None:
