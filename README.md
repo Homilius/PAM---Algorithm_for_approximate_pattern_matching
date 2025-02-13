@@ -1,12 +1,57 @@
-The code is incomplete and has not undergone thorough testing yet (put the principle works well). I will fix this when i have time.
+PAM (Pigeonhole Approximative Matching)
 
-I have uploaded this project to share an idea because I believe it provides an intuitive approach to solving and understanding the approximate pattern matching problem. I propose naming it PAM (Pigeonhole Approximative Matching).
+Overview
 
-The algorithm is built on the following principles:
+This project presents an intuitive approach to solving and understanding the approximate pattern matching problem. The algorithm, which I propose naming Pigeonhole Approximative Matching (PAM), leverages the pigeonhole principle to efficiently identify approximate matches in a reference string.
 
-By allowing up to 'd' mismatches, we apply the pigeonhole principle and divide our substring into 'd+1' pieces. We can find one of these pieces (if a match exists) using exact pattern matching, which is a relatively simpler problem to solve. These pieces are then searched using binary search in a suffix array constructed from the reference string. In this implementation, the suffix array is created through prefix doubling. Once we obtain an exact match of one of these pieces, we can backtrack to the position that corresponds to the beginning of our pattern (note that this position is in relation to the reference string but potential indels are in relation to the pattern thus we will have to do some additional steps if we want the exact position with respect to the reference string). These steps provide us with all candidate positions that warrant further investigation.
-Next, we perform a series of local alignments using these intervals (-d in the beginning +d in the end to capture potential indels; not counting mismatches in the ends). Finally, we select the best alignment (within d edits) and return the matching position along with its corresponding cigar string.
+Status
 
-The main idea here is that the algorithm incurs very little overheads and it is unlikely that we will need to perform a significant amount of extra work. For example, if we divide a pattern of size, say, 100 into four pieces of size 25 and obtain a match, it is very probable that this match represents a genuine position. This is because a match of size 25 is unlikely to occur multiple times by chance alone, at least in a genome. Therefore, while the worst-case running time may not be ideal, we are somewhat protected as long as our pattern has a certain length. 
+The implementation is incomplete and has not undergone thorough testing yet. The core principle works well, but further optimizations and debugging are needed. I will improve and refine the implementation when I have time.
 
-I am convinced that this algorithm has the potential to run quite efficiently with the right implementation (rigth now a lot of stuff can be optimized). Please feel free to correct or optimize any parts and shoot me an email antonhomilius@hotmail.com.
+Algorithm Principle
+
+The PAM algorithm is built upon the following ideas:
+
+Pigeonhole Principle & Substring Division
+
+Given a pattern with up to d mismatches, we split it into d+1 segments.
+
+If a match exists, at least one of these segments must match exactly with the reference string.
+
+Exact Matching Using a Suffix Array
+
+The reference string is preprocessed into a suffix array using the prefix-doubling method.
+
+We perform binary search on the suffix array to locate exact matches for one of the pattern's segments.
+
+Candidate Position Identification
+
+After finding an exact match for one of the segments, we backtrack to estimate the starting position of the full pattern.
+
+This step accounts for potential insertions and deletions (indels), ensuring alignment with the reference string.
+
+Local Alignment & Best Match Selection
+
+We perform local alignments within an interval expanded by -d at the start and +d at the end.
+
+This ensures we capture potential indels without counting mismatches at the boundaries.
+
+The best alignment (within d edits) is selected, and we return its matching position along with the corresponding CIGAR string.
+
+Advantages & Considerations
+
+Minimal Overhead: The algorithm reduces unnecessary computations by focusing only on the most promising candidate positions.
+
+Practical Efficiency: Although the worst-case time complexity may not be optimal, real-world scenarios (e.g., genomic sequences) offer protection since a random 25-character match is unlikely to occur multiple times.
+
+Optimization Potential: The current implementation can be significantly improved in terms of speed and memory efficiency.
+
+Contributing
+
+I believe this algorithm has the potential to be highly efficient with the right optimizations. Contributions and improvements are welcome! If you have any suggestions or optimizations, feel free to create a pull request or contact me at:
+
+📧 antonhomilius@hotmail.com
+
+Disclaimer
+
+This project is still a work in progress. Expect further refinements and enhancements in future updates.
